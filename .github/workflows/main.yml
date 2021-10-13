@@ -56,18 +56,7 @@ jobs:
         run: goveralls -coverprofile=coverage.out -service=github
 
       # Push to dockerhub
-      - name: Push catalogue to Docker Hub
-        uses: docker/build-push-action@v1
-        if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/master'
-        with:
-          username: ${{ secrets.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_PASS }}
-          dockerfile: go/src/github.com/microservices-demo/catalogue/docker/catalogue/Dockerfile
-          path: go/src/github.com/microservices-demo/catalogue
-          repository: ${{ env.GROUP }}/${{ env.REPO }}
-          tag_with_ref: true
-          tag_with_sha: true
-
+      
       - name: Push catalogue-db to Docker Hub
         uses: docker/build-push-action@v1
         if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/master'
@@ -104,5 +93,5 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            abhishek138/notification:${{ steps.prepare.outputs.tag_name }}
-            abhishek138/notification:latest
+            abhishek138/catalogue:${{ steps.prepare.outputs.tag_name }}
+            abhishek138/catalogue:latest
