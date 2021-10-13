@@ -36,3 +36,4 @@ jobs:
           tags: |
             abhishek138/resource:${{ steps.prepare.outputs.tag_name }}
             abhishek138/resource:latest
+            
